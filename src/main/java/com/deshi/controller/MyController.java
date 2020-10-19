@@ -1,31 +1,27 @@
 package com.deshi.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPObject;
 import com.deshi.annotation.ControllerEndpoint;
 import com.deshi.annotation.Limit;
 import com.deshi.pojo.Other;
 import com.deshi.pojo.VO;
 import com.deshi.service.MyService;
+import com.deshi.service.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.MediaSize;
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URLDecoder;
-import java.util.Enumeration;
-import java.util.Map;
 
 @RestController
 @RequestMapping
 public class MyController {
   @Autowired
   private MyService myService;
+
+
 
   @GetMapping("/my")
   public String my(){
@@ -151,12 +147,25 @@ public class MyController {
   }
 
   @GetMapping("/xl")
-  @Limit(name = "新增菜单/按钮", key = "addMenu", prefix = "menu", period = 3, count = 1)
+  @Limit(name = "新增菜单/按钮", key = "addMenu", prefix = "menu", period = 3, count = 1) // 限流的
   public String xl(){
 
     System.out.println("执行完了1111");
 
     return "ok";
 
+  }
+
+  @Autowired
+  private ValidateCodeService validateCodeService;
+
+  @GetMapping("/captcha")
+  @ResponseBody
+  public void captcha(HttpServletRequest request, HttpServletResponse response) {
+    try {
+      validateCodeService.create(request, response);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

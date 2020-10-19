@@ -84,7 +84,7 @@ public class LimitAspect {
 
     // 定义key参数
     List<String> keys = new Vector<>();  //线程安全的集合  多线程使用
-    keys.add(key);
+    keys.add(limit.prefix()+"_"+ limit.key()+ key);
 
     // 获取Lua脚本内容
     String luaScript = buildLuaScript();
