@@ -27,5 +27,5 @@ spring:
 
 mybatis:
   #config-location: classpath:mybatis.xml
-  type-aliases-package: com.deshi.pojo
+  type-aliases-package: com.ceshi.pojo
   mapper-locations: classpath:mapper/*.xml
