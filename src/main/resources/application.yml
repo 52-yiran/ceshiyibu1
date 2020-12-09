@@ -8,7 +8,6 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # url: jdbc:mysql://47.96.70.166:3306/zhugongjia?useSSL=false
     url: jdbc:mysql://localhost:3306/security_boot?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
     username: root
     password: root
